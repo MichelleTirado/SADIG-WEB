@@ -1,0 +1,147 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  background-color: white;
+  color: var(--fontNormal);
+  overflow: hidden;
+
+  b {
+    color: var(--terciary);
+  }
+
+  h1,
+  h4, p{
+    text-align: center;
+  }
+}
+
+.home-left-container, .home-right-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-left-container {
+  flex-direction: column;
+  // padding: 20px;
+}
+
+.home-img {
+  background-image: url("../../../assets/indentidad/PersonajesNayarit.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.step-timeline {
+  display: flex;
+
+  .step-item {
+    display: flex;
+    gap: 5px;
+
+    .step-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      .step-point {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .status {
+        padding: 5px 8px;
+        border-radius: 20px;
+        color: white;
+        font-size: 0.75rem;
+      }
+    }
+
+    .step-line {
+      width: 50px;
+      height: 5px;
+      margin-top: 20px;
+    }
+  }
+}
+
+.green {
+  background-color: #02bd54;
+}
+
+.blue {
+  background-color: #0259bd;
+}
+
+.gray {
+  background-color: rgb(202, 202, 202);
+}
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 100px;
+
+  &__header>* {
+    color: #003865;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100%;
+
+    &__table {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      flex-basis: 0;
+      flex-grow: 4;
+      background-color: azure;
+      gap: 10px;
+      overflow: scroll;
+
+      .save-button {
+        align-self: end;
+      }
+    }
+
+    &__image {
+      padding: 20px;
+      flex-basis: 0;
+      flex-grow: 1;
+      background-color: azure;
+      overflow: scroll;
+    }
+  }
+
+
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 1s ease-out forwards;
+}

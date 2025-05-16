@@ -1,0 +1,94 @@
+<div class="header">
+  <div class="header__hamburger" (click)="toggleMenu()">
+    <mat-icon class="material-symbols-outlined">menu</mat-icon>
+  </div>
+
+  <div class="header__logo">
+    <img src="../../../assets/indentidad/SHBG_Logo.png" alt="Logo SHBG">
+  </div>
+
+  <div class="header__menu" *ngIf="sharedService.menuVisible">
+    <a class="menu-link is-active" routerLink="home">Inicio</a>
+    <a href="#">Gestión Documental</a>
+    <a href="#">Archivo Digital</a>
+    <a href="#">Administración</a>
+    <!-- <a *ngIf="userRole == 'ADMIN' || userRole == 'VIEWER'" class="menu-link" routerLink="attendance/review">Consulta</a> -->
+    <div class="item">
+    <!-- <a *ngIf="userRole == 'ADMIN' || userRole == 'REPORTING'" class="menu-link" routerLink="issue-manager/justify">Aclaraciones</a> -->
+    <div  class="submenu">
+      <a class="submenu-link" routerLink="issue-manager/upload-justify">
+        Subir justificantes
+      </a>
+    </div>
+    </div>
+    <!-- <a *ngIf="userRole == 'ADMIN' || userRole == 'REPORTING'" class="menu-link" routerLink="attendance/report">Reporte</a> -->
+    <div class="item">
+    <!-- <a *ngIf="userRole == 'ADMIN' || userRole == 'MANAGER'" class="menu-link" routerLink="employees/personal-manager">Personal</a> -->
+    <div  class="submenu">
+      <a class="submenu-link" routerLink="employees/add">
+        Agrgar nuevo empleado
+      </a>
+      <a class="submenu-link">
+        Dar de baja empleado
+      </a>
+    </div>
+    </div>
+    <!-- <a *ngIf="userRole == 'ADMIN'" class="menu-link" routerLink="attendance/timeClock">Reloj Checador</a> -->
+  </div>
+
+  <div id="mobileMenu" class="header__mobile-menu">
+    <div class="gobIconBtn contrast" (click)="toggleMenu()">
+      <mat-icon class="material-symbols-outlined">cancel</mat-icon>
+    </div>
+
+    <span style="display: flex; gap: 10px;">
+      <div [ngClass]="{'santa': ((today.getMonth()+1)==11 && today.getDate() >= 20) || (today.getMonth()+1)==12}"
+        *ngIf="getPicture() != null && getPicture() != ''">
+        <img [src]="getPicture()" style="width: 40px; height: 40px; border-radius: 100%; background-color: white;" alt="Foto Personal">
+      </div>
+      <p *ngIf="getPicture() == null || getPicture() == ''" class="letter"
+        [ngClass]="{'hat': (today.getMonth()+1)==6, 'santa': ((today.getMonth()+1)==11 && today.getDate() >= 20) || (today.getMonth()+1)==12}">
+        {{user.substring(0,1)}}</p>
+      <p class="user" style="color: white; font-weight: bold;">HOLA {{user.split(" ")[0]}}
+      </p>
+    </span>
+
+    <a (click)="toggleMenu()" class="menu-link is-active" href="#">Inicio</a>
+    <a (click)="toggleMenu()" class="menu-link" routerLink="attendance/review">Consulta</a>
+    <a (click)="toggleMenu()" class="menu-link" routerLink="issue-manager/justify">Aclaraciones</a>
+    <a (click)="toggleMenu()" class="menu-link" routerLink="attendance/report">Reporte</a>
+    <a (click)="toggleMenu()" class="menu-link" href="#">Personal</a>
+    <a (click)="toggleMenu()" class="menu-link" routerLink="attendance/timeClock">Reloj Checador</a>
+    <br>
+    <a (click)="toggleMenu()" class="menu-link" href="#">Ver Perfil</a>
+    <a (click)="localStorageC()" class="menu-link" href="#">Salir</a>
+  </div>
+
+  <div id="profileDet" class="header__profile-data" *ngIf="sharedService.menuVisible">
+    <div [ngClass]="{'santa': ((today.getMonth()+1)==11 && today.getDate() >= 20) || (today.getMonth()+1)==12}"
+      *ngIf="getPicture() != null && getPicture() != ''">
+      <img [src]="getPicture()" style="width: 40px; height: 40px; border-radius: 100%;" alt="Foto Personal">
+    </div>
+    <p *ngIf="getPicture() == null || getPicture() == ''" class="letter"
+      [ngClass]="{'hat': (today.getMonth()+1)==6, 'santa': ((today.getMonth()+1)==11 && today.getDate() >= 20) || (today.getMonth()+1)==12}">
+      {{user.substring(0,1)}}</p>
+    <p class="user">HOLA {{user.split(" ")[0]}} <mat-icon class="material-symbols-outlined">arrow_drop_down</mat-icon>
+    </p>
+
+    <div class="header__profile-data__profile-detail" *ngIf="showProfileDetail==true">
+      <div class="profile-top">
+        <img *ngIf="getPicture() != null && getPicture() != ''" [src]="getPicture()"
+          style="width: 40px; height: 40px; border-radius: 100%; margin: auto;" alt="Foto Personal">
+        <p *ngIf="getPicture() == null || getPicture() == ''" class="letter-det">
+          {{user.substring(0,1)}}</p>
+        <p class="user-det">{{user}}</p>
+      </div>
+      <button class="detail-btn" routerLink="/Profile">
+        <mat-icon class="material-symbols-outlined">person</mat-icon>Ver perfil
+      </button>
+      <button class="detail-btn" (click)="localStorageC()">
+        <mat-icon class="material-symbols-outlined">logout</mat-icon>Cerrar sesión
+      </button>
+    </div>
+  </div>
+</div>

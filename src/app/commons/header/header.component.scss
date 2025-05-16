@@ -1,0 +1,566 @@
+@mixin mobile() {
+  @media screen and (max-width: 1280px) {
+    @content;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 5dvh;
+  width: 100%;
+  gap: 50px;
+  border-bottom: 1px solid var(--secundary);
+  background-color: white;
+  padding: 5px 30px;
+  white-space: nowrap;
+  position: relative; // Necesario para el perfil y el botón de menú
+
+  @include mobile() {
+    padding: 0 16px;
+  }
+
+  &__logo {
+    height: 100%;
+
+    @include mobile() {
+      height: 100%;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    @include mobile() {
+      display: none;
+    }
+
+    a {
+      padding: 5px 10px;
+      text-decoration: none;
+      color: var(--fontNormal);
+
+      font: {
+        size: 0.9rem;
+        weight: bold;
+      }
+
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+
+      @include mobile() {
+        &:not(.main-header-link) {
+          display: none; // Ocultar enlaces en pantallas pequeñas
+        }
+      }
+
+      &.is-active,
+      &:hover {
+        color: var(--terciary);
+        border-bottom: 2px solid var(--terciary);
+      }
+    }
+
+    @include mobile() {
+      display: none; // Ocultar el menú en dispositivos móviles por defecto
+      width: 100%; // Asegura que el menú ocupe el ancho completo
+      flex-direction: column;
+      gap: 10px;
+      position: absolute;
+      top: 100%; // Ajustar según el diseño
+      left: 0;
+      background-color: white;
+      border: 1px solid var(--secundary);
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    &.show {
+      display: flex; // Mostrar menú cuando la clase "show" está presente
+    }
+  }
+
+  &__mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    gap: 20px;
+    padding: 20px;
+    width: 100vw;
+    height: 100dvh;
+    background-color: var(--primary);
+    z-index: 1000;
+    overflow: scroll;
+    transition: 0.5s ease;
+
+    @include mobile() {
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      padding: 5px 10px;
+      text-decoration: none;
+      color: var(--fontNormal);
+
+      font: {
+        size: 0.9rem;
+        weight: bold;
+      }
+
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+
+      &.is-active,
+      &:hover {
+        color: white;
+        border-bottom: 2px solid white;
+      }
+    }
+  }
+
+  &__profile-data {
+    display: flex;
+    position: absolute;
+    right: 0;
+    padding: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+
+    @include mobile() {
+      display: none;
+    }
+
+    .santa {
+      position: relative;
+    }
+
+    .santa::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 40px;
+      height: 30px;
+      top: -10px;
+      left: -20px;
+    //   background-image: url("../../../assets/Misc/santaHat.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .user {
+      margin: auto;
+      color: var(--lightColor);
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .letter {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background-color: #FAFAFA;
+      color: var(--M19Primary);
+      transition: background 0.5s;
+    }
+
+    &__profile-detail {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      padding: 20px;
+      gap: 3px;
+      top: 8vh;
+      right: 0;
+      border-radius: 0 0 0 20px;
+      background-color: white;
+      z-index: 1000;
+      animation-name: appear;
+      animation-duration: 0.5s;
+
+      .profile-top {
+        display: flex;
+        gap: 5px;
+      }
+
+      .user-det {
+        margin: auto;
+        color: #5E4F4F;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+
+      .detail-btn {
+        color: #5E4F4F;
+        background-color: white;
+        font-size: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        text-align: left;
+        font-weight: bold;
+        border: none;
+        outline: none;
+        transition: background 0.5s;
+        cursor: pointer;
+      }
+
+      .detail-btn:hover {
+        color: white;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #a3a3a3;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+
+  .header__hamburger {
+    display: none; // Ocultar por defecto
+
+    @include mobile() {
+      display: block; // Mostrar botón en dispositivos móviles
+      cursor: pointer;
+    }
+
+    mat-icon {
+      font-size: 2rem; // Ajustar según el diseño
+    }
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin mobile() {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 10dvh;
+  width: 100%;
+  gap: 50px;
+  border-bottom: 1px solid var(--secundary);
+  background-color: white;
+  padding: 10px 30px;
+  white-space: nowrap;
+  position: relative;
+
+  @include mobile() {
+    padding: 0 16px;
+  }
+
+  &__logo {
+    max-width: 300px;
+
+    @include mobile() {
+      max-width: 50%;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    @include mobile() {
+      display: none;
+    }
+
+    .item {
+      position: relative;
+
+      a {
+        padding: 5px 10px;
+        text-decoration: none;
+        color: var(--fontNormal);
+        cursor: pointer;
+
+        font: {
+          size: 0.9rem;
+          weight: bold;
+        }
+
+        border-bottom: 2px solid transparent;
+        transition: 0.3s;
+
+        &:hover,
+        &.is-active {
+          color: var(--terciary);
+          border-bottom: 2px solid var(--terciary);
+        }
+
+        &:hover+.submenu {
+          display: block !important;
+        }
+
+      }
+
+      .submenu {
+        display: none;
+        /* Oculto por defecto */
+        position: absolute;
+        top: 100%;
+        /* Aparece debajo del menú principal */
+        left: 0;
+        background-color: white;
+        border: 1px solid var(--secundary);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 5px 0;
+        min-width: 150px;
+        /* Tamaño mínimo del submenú */
+
+        .submenu-link {
+          padding: 8px 15px;
+          color: var(--fontNormal);
+          text-decoration: none;
+          display: block;
+          font-size: 0.85rem;
+          transition: background 0.3s;
+
+          &:hover {
+            background-color: var(--terciary);
+            color: white;
+          }
+        }
+
+        &:hover {
+          display: block !important;
+        }
+      }
+    }
+
+    @include mobile() {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      gap: 10px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      border: 1px solid var(--secundary);
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    &.show {
+      display: flex;
+    }
+  }
+
+  &__mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    gap: 20px;
+    padding: 20px;
+    width: 100vw;
+    height: 100dvh;
+    background-color: var(--primary);
+    z-index: 1000;
+    overflow: scroll;
+    transition: 0.5s ease;
+
+    @include mobile() {
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      padding: 5px 10px;
+      text-decoration: none;
+      color: var(--fontNormal);
+      cursor: pointer;
+
+      font: {
+        size: 0.9rem;
+        weight: bold;
+      }
+
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+
+      &.is-active,
+      &:hover {
+        color: white;
+        border-bottom: 2px solid white;
+      }
+    }
+
+    .menu-item-with-children {
+      position: relative;
+
+      .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border: 1px solid var(--primary);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 5px 0;
+        width: 100%;
+
+        .submenu-link {
+          padding: 8px 15px;
+          color: var(--fontNormal);
+          text-decoration: none;
+          display: block;
+          font-size: 0.85rem;
+          transition: background 0.3s;
+
+          &:hover {
+            background-color: var(--primary);
+            color: white;
+          }
+        }
+      }
+
+      &:hover .submenu {
+        display: block;
+      }
+    }
+  }
+
+  .header__hamburger {
+    display: none;
+
+    @include mobile() {
+      display: block;
+      cursor: pointer;
+    }
+
+    mat-icon {
+      font-size: 2rem;
+    }
+  }
+
+  &__profile-data {
+    display: flex;
+    position: absolute;
+    right: 0;
+    padding: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+
+    @include mobile() {
+      display: none;
+    }
+
+    .user {
+      margin: auto;
+      color: var(--lightColor);
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .letter {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background-color: #FAFAFA;
+      color: var(--M19Primary);
+      transition: background 0.5s;
+    }
+
+    &__profile-detail {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      padding: 20px;
+      gap: 3px;
+      top: 8vh;
+      right: 0;
+      border-radius: 0 0 0 20px;
+      background-color: white;
+      z-index: 1000;
+      animation-name: appear;
+      animation-duration: 0.5s;
+
+      .profile-top {
+        display: flex;
+        gap: 5px;
+      }
+
+      .user-det {
+        margin: auto;
+        color: #5E4F4F;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+
+      .detail-btn {
+        color: #5E4F4F;
+        background-color: white;
+        font-size: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        text-align: left;
+        font-weight: bold;
+        border: none;
+        outline: none;
+        transition: background 0.5s;
+        cursor: pointer;
+      }
+
+      .detail-btn:hover {
+        color: white;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #a3a3a3;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

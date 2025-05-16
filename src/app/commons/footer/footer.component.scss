@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  min-height: 3dvh;
+  width: 100%;
+  background-color: var(--primary);
+
+  &__copyright {
+    color: white;
+    text-align: center;
+
+    font: {
+      size: 0.9rem;
+      weight: bold;
+    }
+  }
+}

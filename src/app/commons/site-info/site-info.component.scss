@@ -1,0 +1,16 @@
+.siteInfo {
+  display: flex;
+  align-items: center;
+  height: 4vh;
+  width: 100%;
+  padding: 10px 30px;
+  background: var(--secundary);
+
+  &__pageName {
+    color: var(--fontNormal);
+    font: {
+      size: 1rem;
+      weight: bold;
+    }
+  }
+}
