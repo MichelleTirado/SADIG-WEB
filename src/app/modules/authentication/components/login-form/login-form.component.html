@@ -1,0 +1,48 @@
+<div class="loginForm container">
+  <div class="form-title">
+    <h1 class="title">SADIG</h1>
+    <h4 class="meaning">SISTEMA DE ARCHIVO DIGITAL GUBERNAMENTAL</h4>
+    <span>Inicio de sesión</span>
+  </div>
+
+  <br>
+
+  <!-- Modal: Login -->
+  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()">
+    <!-- CURP -->
+    <mat-form-field appearance="outline">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput id="curp" formControlName="curp" required>
+      <mat-icon class="material-symbols-outlined" matPrefix> account_circle </mat-icon>
+      
+      <mat-error *ngIf="loginForm.get('curp')?.hasError('required')">
+        *El correo electrónico es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="{{showPassword ? 'text': 'password'}}" id="password" formControlName="password" required="">
+      <mat-icon class="material-symbols-outlined" matPrefix> password </mat-icon>
+      <mat-icon class="material-symbols-outlined" matSuffix (click)="showPassword = !showPassword" style="cursor:pointer;"
+        *ngIf="showPassword; Else HidePassword">visibility_on</mat-icon>
+      <ng-template #HidePassword>
+        <mat-icon class="material-symbols-outlined" matSuffix (click)="showPassword = !showPassword"
+          style="cursor:pointer;"></mat-icon>
+      </ng-template>
+
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        *La contraseña es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <div class="action-wrapper">
+      <span class="action-row">
+        <button class="gobBtn base" type="submit">Acceder</button>
+      </span>
+    </div>
+
+  </form>
+
+</div>

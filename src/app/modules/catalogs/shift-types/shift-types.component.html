@@ -1,0 +1,225 @@
+<div class="review">
+  
+  <!-- Button to show filters -->
+  <button
+    class="filterBtn"
+    (click)="toggleFilters()"
+    [ngClass]="{ 'filterBtn--open': showFilters }"
+  >
+    {{ "Filtrado de Datos" | uppercase }}
+  </button>
+
+  <div
+    #filtersDiv
+    id="filters"
+    class="review__filters container"
+    [class.open]="showFilters"
+  >
+    <app-catalog-filter
+      [catalog]="'correspondenceType'"
+      *ngIf="showFilters"
+    ></app-catalog-filter>
+  </div>
+
+  <!-- Backdrop -->
+  <div
+    class="filter-backdrop"
+    *ngIf="showFilters"
+    (click)="toggleFilters()"
+  ></div>
+
+  <div 
+    class="review__table-result container"
+    [ngClass]="{ 'with-filter-panel': showFilters }"
+  >
+  <div style="display: flex; justify-content: flex-end">
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        type="text"
+        (input)="onSearchInputChange($any($event.target).value)"
+        placeholder="Buscar por tipo de turnado"
+      />
+      <mat-icon class="material-symbols-outlined" matSuffix>
+        search
+      </mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="tableContainer">
+    <table mat-table class="styled-table">
+      <!-- Table Headers -->
+      <thead>
+        <tr>
+          <th>
+            <button mat-icon-button class="new-button" (click)="newRecord()">
+                <mat-icon>add_box</mat-icon> <b style="color: white">Nuevo</b>
+            </button>
+          </th> 
+          <th *ngFor="let column of columns">
+            {{'TableHeader.' + column | translate }}
+          </th>
+        </tr>
+      </thead>
+
+      <!-- Table body -->
+      <tbody>
+        <tr *ngFor="let shiftType of shiftTypes">
+          <td>
+            <button 
+              mat-icon-button 
+              class="edit-button" 
+              (click)="onEditInit(shiftType)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+
+            <td *ngFor="let column of columns">
+                <ng-container *ngIf="column === 'available'; else normalText">
+                    <mat-icon 
+                      *ngIf="shiftType[column] === true" 
+                      class="icon-active"
+                    >check_circle</mat-icon>
+                    <mat-icon 
+                      *ngIf="shiftType[column] === false" 
+                      class="icon-inactive"
+                    >cancel</mat-icon>
+                </ng-container>
+
+                <ng-template #normalText>
+                {{ shiftType[column] | titlecase }}
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- New: Modal -->
+  <!-- Modal -->
+  <div class="modal" *ngIf="isNewRecord">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Registrar tipo de turnado</h3>
+      </div>
+      
+      <div style="padding: 20px;">
+        <form [formGroup]="newForm">
+          <div class="form-row">
+            <!-- Correspondence Type -->
+            <div class="form-group">
+              <label>Tipo de Turnado</label>
+              <input
+                type="text"
+                pInputText
+                name="shiftType"
+                formControlName="shiftType"
+                class="form-control"
+                style="text-transform: uppercase;"
+              />
+            </div>
+          </div>
+
+        <br />
+
+        <div class="form-row">
+          <!-- Available -->
+          <div class="form-group">
+            <label>Activo</label>
+            <label class="switch">
+              <input
+                type="checkbox"
+                formControlName="available"
+                name="available"
+              />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="gobBtn altern"
+            (click)="closeModal()"
+          >
+            Cancelar
+          </button>
+          
+          <button 
+            type="button" 
+            class="gobBtn base" 
+            (click)="createShiftType()"
+          >
+            Guardar
+          </button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Edit: Modal -->
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <h2>Editar tipo de turnado</h2>
+      <form>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre(s)</label>
+            <input type="text" name="FirstName" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Apellido Materno</label>
+            <input type="text"  name="LastName" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Apellido Paterno</label>
+            <input type="text"  name="SecondLastName" class="form-control" />
+          </div>
+        </div>
+
+        <br>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>No. Celular</label>
+            <input type="tel" name="PhoneNumber" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" name="Email" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>CURP</label>
+            <input type="CURP" name="CURP" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Activo</label>
+            <label class="switch">
+              <input type="checkbox" name="available" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <br>
+
+      </form>
+    </div>
+  </div>
+
+  <button (click)="toggleFilters()" title="Toggle Filters" type="button" class="review__filters-button gobBtn rndBtn">
+    <mat-icon class="material-symbols-outlined">
+      tune
+    </mat-icon>
+  </button>
+</div>
+
+

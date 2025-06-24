@@ -1,0 +1,11 @@
+<div class="loaderBody">
+    <div class="loaderBody__content">
+        <div class="loader loader-1">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+        </div>
+
+        <p class="message">{{loader.message}}</p>
+        <p class="message" *ngIf="slowLoading==true">Está tomando más tiempo del esperado. Revisa tu conexión a internet.</p>
+    </div>
+</div>

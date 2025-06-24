@@ -1,0 +1,27 @@
+{
+    "TableHeader": {
+      "employeeId": "Employee ID",
+      "employeePrefix": "Titulo",
+      "employeeName": "Nombre de empleado",
+      "employeeCode": "Código de Empleado",
+      "employeeGender": "Género",
+      "employeeCurp": "CURP",
+      "employeeEmail": "Email",
+      "employeePicture": "Imagen",
+      "employeeDirection": "Dirección",
+      "employeeArea": "Área",
+      "NIVE_NIVEL": "Nivel",
+      "employeePosition": "Posición",
+      "employeeRegimen": "Régimen",
+      "employeeAvailable": "Activo",
+
+      "available": "Activo",
+      "correspondenceType": "Tipo de Correspondencia",
+      "description": "Descripción",
+
+      "shiftType": "Tipo de turnado"
+      
+    },
+
+    "Edit": "Editar"
+  }

@@ -1,6 +1,9 @@
-<!-- spinner loader -->
+<div *ngIf="loading$ | async" class="spinner-overlay">
+  <app-loader></app-loader>
+</div>
 
-<!-- general content -->
+
+
 <div class="content">
 
   <app-header *ngIf="sharedService.headerFooterVisible"></app-header>

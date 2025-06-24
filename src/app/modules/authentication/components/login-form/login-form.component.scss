@@ -1,0 +1,73 @@
+@mixin mobile() {
+  @media screen and (max-width: 500px) {
+    @content
+  }
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  max-width: 35rem;
+  width: 100%;
+  height: auto;
+  padding: 20px 80px;
+  margin: auto;
+
+  @include mobile() {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .title {
+    margin: auto;
+    text-align: center;
+
+    font: {
+      size: 1.7rem;
+      weight: bold;
+    }
+  }
+
+  .meaning {
+    margin: auto;
+    text-align: center;
+
+    font: {
+      size: 0.9rem;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .action-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      // margin: auto;
+      gap: 10px;
+
+      .action-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+}
+
+.form-title {
+  display: flex; 
+  flex-direction: column; 
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}

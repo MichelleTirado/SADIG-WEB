@@ -1,0 +1,67 @@
+<div class="filterContainer">
+  <ng-container>
+    <form class="filterContainer__filterForm" [formGroup]="searchForm">
+
+      <!-- Dependency's filter container -->
+      <ng-container *ngIf="(catalog=='user' || catalog=='docFile')">
+
+        <div><b>Correspondence Type</b></div>
+        <mat-form-field appearance="outline">
+          <mat-select #dependencie formControlName="Dependency" placeholder="Elige una dependencia">
+            <!-- <mat-option [value]="'ALL'">Todos</mat-option>
+            <mat-option *ngFor="let d of dependencies" [value]="d.DependencyId">
+              {{d.DependencyName | titlecase}} <span *ngIf="d.Abbreviation">({{d.Abbreviation | uppercase}})</span>
+            </mat-option> -->
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <!-- Document Type's filter container -->
+      <ng-container *ngIf="catalog=='docFile'">
+        <div><b>Tipo de Documento</b></div>
+        <mat-form-field appearance="outline">
+          <mat-select #dependencie formControlName="DocumentType" placeholder="Elige un tipo">
+            <!-- <mat-option [value]="'ALL'">Todos</mat-option> -->
+            <!-- <mat-option *ngFor="let d of availableDocTypes" [value]="d.DocumentTypeId">{{d.DocumentType}}</mat-option> -->
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <!-- User rol's filter container -->
+      <ng-container *ngIf="catalog=='user'">
+        <div><b>Rol de Usuario</b></div>
+        <mat-form-field appearance="outline">
+          <mat-select #dependencie formControlName="Role" placeholder="Elige un Rol">
+            <!-- <mat-option [value]="'ALL'">Todos</mat-option> -->
+            <!-- <mat-option *ngFor="let r of roles" [value]="r.RoleId">{{r.Role}}</mat-option> -->
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <!-- Status's filter container -->
+      <div><b>Estado</b></div>
+      <mat-radio-group class="status" formControlName="available">
+        <!-- <mat-radio-button value="true">Activo</mat-radio-button>
+        <mat-radio-button value="false">Inactivo</mat-radio-button> -->
+      </mat-radio-group>
+
+      <div class="btnContainer">
+        <button (click)="clearSelection()" type="button" class="gobBtn base btnFilter">Limpiar filtros</button>
+        <button type="button" class="gobBtn base btnFilter" (click)="applyFilters()">Filtrar</button>
+      </div>
+      
+
+      <!-- <div><b>Buscador</b></div>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="Search" type="text" (input)="onSearchInputChange($any($event.target).value)"
+          placeholder="Ingresa tu búsqueda">
+        <mat-icon class="material-symbols-outlined" matSuffix> search </mat-icon>
+      </mat-form-field>
+
+       -->
+      
+      
+    </form>
+  </ng-container>
+
+</div>

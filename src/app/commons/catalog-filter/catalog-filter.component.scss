@@ -1,0 +1,35 @@
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 5px;
+  
+    overflow-x: scroll;
+  
+    &__filterForm {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  
+      .status {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+.filterContainer h1 {
+  text-align: center;
+}
+  
+  .btnFilter {
+    width: 50%;
+  }
+
+  .btnContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }

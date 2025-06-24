@@ -1,0 +1,79 @@
+<div class="home">
+
+  <div class="home-left-container slide-up">
+    
+    <h1><b>GENERADOR DE FICHA DE CONTROL</b></h1>
+
+    <div class="modal">
+        <div class="modal-content">
+            <!-- Modal body with scroll if is necessary -->
+             <div class="modal-body">
+
+                <mat-tab-group>
+                    <!-- Internal correspondence -->
+                    <mat-tab label="Correspondencia Interna">
+                        <p>Una <b>Correspondencia Interna</b> </p>
+
+                        <form [formGroup]="internalCorrespondence" (ngSubmit)="generateInternalControlCorrespondence()">
+
+                            <div class="form-group" style="display: flex;">
+                                <label>Folio interno:</label>
+                                <input 
+                                    type="text" 
+                                    formControlName="internalNumber" 
+                                    class="form-control"
+                                />
+                            </div>   
+
+                            <div class="form-group">
+                                <label>Origen:</label>
+                                <input 
+                                    type="text" 
+                                    formControlName="source" 
+                                    class="form-control"
+                                />
+                            </div>           
+                            
+                            <div class="form-group">
+                                <label>Destino:</label>
+                                <input 
+                                    type="text" 
+                                    formControlName="target" 
+                                    class="form-control"
+                                />
+                            </div>  
+
+                            <div class="form-group">
+                                <label>Fecha de recibido:</label>
+                                <input 
+                                    type="text" 
+                                    formControlName="receiptDate" 
+                                    class="form-control"
+                                />
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Asunto:</label>
+                                <input 
+                                    type="text" 
+                                    formControlName="subject" 
+                                    class="form-control"
+                                />
+                            </div> 
+                        </form>
+
+
+                    </mat-tab>
+
+                    
+                </mat-tab-group>
+             </div>
+        </div>  
+    </div>
+  </div>
+
+
+  
+  <div class="home-right-container home-img slide-up">
+  </div>
+</div>

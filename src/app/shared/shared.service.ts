@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class SharedService {
 
+  pageName: string = '';
   setTitle: string = '';
-  headerFooterVisible = true;
+  headerFooterVisible: boolean = true;
   menuVisible = true;
 }

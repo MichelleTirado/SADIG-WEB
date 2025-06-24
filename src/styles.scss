@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -73,34 +72,26 @@ $gobalt: (
   )
 );
 
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$SADIG-primary: mat.define-palette($gobstyle);
-$SADIG-accent: mat.define-palette($gobalt);
+$SHBG-primary: mat.define-palette($gobstyle);
+$SHBG-accent: mat.define-palette($gobalt);
 
 // The warn palette is optional (defaults to red).
-$SADIG-warn: mat.define-palette(mat.$red-palette);
+$SHBG-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$SADIG-theme: mat.define-light-theme((
-  color: (
-    primary: $SADIG-primary,
-    accent: $SADIG-accent,
-    warn: $SADIG-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0
-));
+$SHBG-theme: mat.define-light-theme((color: (primary: $SHBG-primary,
+        accent: $SHBG-accent,
+        warn: $SHBG-warn,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($SADIG-theme);
+@include mat.all-component-themes($SHBG-theme);
 
-/* You can add global styles to this file, and also import other style files */
 
 ///////////////////////////////////////////
 // Declaración de colores generales
@@ -114,23 +105,17 @@ $SADIG-theme: mat.define-light-theme((
   --fontContrast: #f0f0f0;
   --alternative: #324b60;
   --primaryBlue: #0259bd;
-  --primaryBlueBackground: rgba(2, 89, 189, 0.2);
   --primaryPurple: #70069e;
-  --primaryPurpleBackground: rgba(112, 6, 158, 0.2);
   --primaryGreen: #02bd54;
-  --primaryGreenBackground: rgba(2, 189, 84, 0.2);
   --primaryYellow: #F8BA43;
-  --primaryYellowBackground: rgba(248, 186, 67, 0.2);
   --primaryOrange: #f87c43;
-  --primaryOrangeBackground: rgba(248, 124, 67, 0.2);
   --primaryRed: #D94555;
-  --primaryRedBackground: rgba(217, 69, 85, 0.2);
 
   --globalRadius: 10px;
 }
 
 ///////////////////////////////////////////
-// Configuración general para scrollbar
+// Configuración general
 * {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
@@ -138,7 +123,7 @@ $SADIG-theme: mat.define-light-theme((
 
   &::-webkit-scrollbar {
     width: 5px;
-    height: 0px;
+    height: 5px;
     background: white;
     border-radius: 0;
     transition: 0.5s ease;
@@ -149,9 +134,13 @@ $SADIG-theme: mat.define-light-theme((
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--alternative);
+    background-color: var(--primary);
     border-radius: 10px;
   }
+}
+
+.sweetActions {
+  gap: 10px;
 }
 
 ///////////////////////////////////////////
@@ -159,6 +148,9 @@ $SADIG-theme: mat.define-light-theme((
 html,
 body {
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   height: 100%;
 }
 
@@ -173,104 +165,49 @@ img {
   height: 100%;
 }
 
-input[type="password"].no-password-toggle::-ms-reveal,
-input[type="password"].no-password-toggle::-ms-clear {
-  display: none;
-}
-
 mat-icon {
-  vertical-align: middle !important;
+  vertical-align: middle;
   height: auto !important;
   width: auto !important;
   transition: 0.5s;
-  color: var(--primary) !important;
-}
-
-.mat-form-field-appearance-outline .mat-form-field-flex {
-  background-color: white;
-}
-
-.mat-input-element {
-  color: var(--primary);
+  color: var(--fontNormal);
 }
 
 ///////////////////////////////////////////
 // Estilo de tooltip
 [data-title] {
   position: relative;
-  display: inline-block; /* Asegura compatibilidad con contenido inline */
-  cursor: help; /* Indica al usuario que es interactivo */
 }
 
 [data-title]:after {
   content: attr(data-title);
   background-color: var(--primary) !important;
   color: var(--secundary);
-  font-size: 0.9rem; /* Ajuste de tamaño para una apariencia más refinada */
+  font-size: 1rem;
   font-weight: bold;
   position: absolute;
-  padding: 5px 15px; /* Espaciado más equilibrado */
-  bottom: 120%; /* Mayor separación entre el tooltip y el elemento */
-  left: 50%; /* Centra el tooltip */
-  transform: translateX(-50%); /* Alinea visualmente con el elemento */
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3); /* Más sutil y elegante */
+  padding: 3px 20px;
+  bottom: 110%;
+  left: 0;
+  box-shadow: 1px 1px 3px #222222;
   opacity: 0;
   z-index: 99999;
   visibility: hidden;
-  border-radius: 6px; /* Bordes más suaves */
-  white-space: nowrap; /* Evita que el texto se desborde */
-  pointer-events: none; /* Evita la interacción con el tooltip */
+  border-radius: 3px;
 }
 
 [data-title]:hover:after {
   opacity: 1;
+  transition: all 0.1s ease 0.5s;
   visibility: visible;
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Animaciones más suaves */
-  transform: translateX(-50%) translateY(-5px); /* Efecto de desplazamiento al aparecer */
 }
 
 ///////////////////////////////////////////
 // Estilo de secciones
 .container {
   background-color: var(--secundary);
-  border-radius: .375rem;
+  border-radius: 10px;
   padding: 20px;
-}
-
-.gob-upload-file-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
-
-  #file {
-    display: none;
-    /* Oculta el input real */
-
-    &+label {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: var(--primary);
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        animation: pulse 1s;
-        box-shadow: 0 0 0 2em transparent;
-        filter: brightness(0.7);
-      }
-
-      &:active {
-        filter: brightness(0.7);
-      }
-    }
-  }
-
-  label {
-    margin-left: 10px;
-  }
 }
 
 .gobTable {
@@ -288,16 +225,90 @@ mat-icon {
   }
 }
 
+th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+}
+
+th[scope="row"] {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+}
+
+th[scope="row"]::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block: 0;
+  border-inline-end: .05em solid #d6d6d6;
+}
+
+
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table thead th {
+  background-color: var(--primary);
+  z-index: 2;
+}
+
+
+.styled-table thead tr {
+  background-color: var(--primary);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.styled-table th {
+  color: #ffffff;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+  /* Filas alternadas */
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+  /* Efecto hover */
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #ddd;
+  /* Línea final */
+}
+
+.styled-table tbody tr {
+  transition: all 0.3s ease;
+}
+
 ///////////////////////////////////////////
 // Estilo de boton y variantes
 .gobBtn {
   height: 30px;
   padding: 0 10px;
-  border-radius: .375rem;
+  border-radius: 10px;
   outline: none !important;
   border: none !important;
   transition: 0.5s;
   white-space: nowrap;
+  min-width: 120px;
   cursor: pointer;
 
   font: {
@@ -305,8 +316,7 @@ mat-icon {
     weight: bold;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     animation: pulse 1s;
     box-shadow: 0 0 0 2em transparent;
     filter: brightness(0.7);
@@ -342,12 +352,28 @@ mat-icon {
   }
 }
 
-.gobIconBtn {
+.gob-action-btn {
+  color: var(--primary);
+  transition: 0.5s;
+  border: none;
+  outline: none;
+  border-radius: 100%;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--secundaryAlt);
+  }
+
+  &[disabled] {
+    color: #999999;
+  }
+}
+
+.gob-icon-btn {
   transition: 0.5s;
   cursor: pointer;
 
-  &:hover,
-  &:focus {
+  &:hover {
     animation: pulse 1s;
     box-shadow: 0 0 0 2em transparent;
     filter: brightness(0.7);
@@ -375,3 +401,130 @@ mat-icon {
   }
 }
 
+.gobIconBtn {
+  transition: 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    animation: pulse 1s;
+    box-shadow: 0 0 0 2em transparent;
+    filter: brightness(0.7);
+  }
+
+  &.base {
+    color: var(--primary) !important;
+  }
+
+  &.altern {
+    color: var(--secundary) !important;
+  }
+
+  &.dark {
+    color: var(--terciary) !important;
+  }
+
+  &.contrast {
+    color: var(--fontNormal) !important;
+  }
+
+  &[disabled] {
+    color: #5E4F4F !important;
+    cursor: not-allowed;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .dialog-responsive {
+    max-width: 100vw !important;
+    max-height: 90vh;
+  }
+}
+
+.dialog-responsive {
+  max-width: 100vw !important;
+  max-height: 90vh;
+}
+
+.cdk-global-overlay-wrapper {
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+}
+
+.diff-added {
+  font-size: 12px;
+  background-color: var(--primaryGreen);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: pre-wrap;
+}
+
+.diff-removed {
+  font-size: 12px;
+  background-color: var(--primaryRed);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: pre-wrap;
+}
+
+.diff-normal {
+  font-size: 12px;
+  padding: 2px 5px;
+  line-height: 1.5;
+  text-align: justify;
+  white-space: pre-wrap;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  box-shadow: 0 0 0 1000px #F5F5F5 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #F5F5F5 inset !important;
+  -webkit-text-fill-color: #000 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+///////////////////////////////////////////
+// Filtering Data 
+.filterBtn {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  height: 200px;
+  width: 40px;
+  background-color: #C5B099;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  border-radius: 0 8px 8px 0;
+  font-weight: bold;
+  z-index: 1001;
+  transition: left 0.3s ease-in-out;
+  text-align: center;
+
+  font: {
+    size: 1rem;
+    weight: bold;
+  }
+}
+
+.filterBtn--open {
+  left: 50vw; 
+}
+
+.filter-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 5; 
+}

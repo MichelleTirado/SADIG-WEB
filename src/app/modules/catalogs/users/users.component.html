@@ -1,0 +1,95 @@
+<div class="review">
+  
+  <!-- Button to show filters -->
+  <button
+    class="filterBtn"
+    (click)="toggleFilters()"
+    [ngClass]="{ 'filterBtn--open': showFilters }"
+  >
+    {{ "Filtrado de Datos" | uppercase }}
+  </button>
+
+  <div
+    #filtersDiv
+    id="filters"
+    class="review__filters container"
+    [class.open]="showFilters"
+  >
+    <app-catalog-filter
+      [catalog]="'correspondenceType'"
+      *ngIf="showFilters"
+    ></app-catalog-filter>
+  </div>
+
+  <!-- Backdrop -->
+  <div
+    class="filter-backdrop"
+    *ngIf="showFilters"
+    (click)="toggleFilters()"
+  ></div>
+
+  <div 
+    class="review__table-result container"
+    [ngClass]="{ 'with-filter-panel': showFilters }"
+  >
+    <div style="display: flex; justify-content: flex-end">
+       <mat-form-field appearance="outline">
+        <input
+          matInput
+          type="text"
+          (input)="onSearchInputChange($any($event.target).value)"
+          placeholder="Buscar por nombre de empleado"
+        />
+        <mat-icon class="material-symbols-outlined" matSuffix>
+          search
+        </mat-icon>
+      </mat-form-field>
+    </div>
+    
+    <div class="tableContainer">
+      <table mat-table class="styled-table">
+
+        <!-- Table Headers -->
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns">
+              {{'TableHeader.' + column | translate }}
+            </th>
+          </tr>
+        </thead>
+
+        <!-- Table body -->
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td *ngFor="let column of columns">
+              <ng-container *ngIf="column === 'employeeAvailable'; else showOtherValue">
+                <mat-icon *ngIf="user[column] === true" class="icon-active">check_circle</mat-icon>
+                <mat-icon *ngIf="user[column] === false" class="icon-inactive">cancel</mat-icon>
+              </ng-container>
+              
+              <ng-template #showOtherValue>
+                <ng-container *ngIf="column === 'employeePicture'; else showText">
+                  <img class="img-table" [src]="getFirebaseImageUrl(user[column])"
+                      alt="Imagen de perfil"/>
+                </ng-container>
+              </ng-template>
+
+              <ng-template #showText>
+                <span *ngIf="column === 'employeePrefix'; else normalText"> {{ user[column] | uppercase }}</span>
+              <ng-template #normalText>
+                {{ user[column] | titlecase }}
+              </ng-template>
+            </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <button (click)="toggleFilters()" title="Toggle Filters" type="button" class="review__filters-button gobBtn rndBtn">
+    <mat-icon class="material-symbols-outlined">
+      tune
+    </mat-icon>
+  </button>
+</div>
